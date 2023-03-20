@@ -80,7 +80,6 @@ TOYWASM_VERSION  = 7c6ff3925d0b0f4d5122df9b1b5761bc2954e014
 TOYWASM_UNPACK   = toywasm
 TOYWASM_TARBALL  = $(TOYWASM_VERSION).zip
 TOYWASM_URL_BASE = https://github.com/yamt/toywasm/archive/
-TOYWASM_URL      = $(TOYWASM_URL_BASE)/$(TOYWASM_TARBALL)
 
 VPATH += $(TOYWASM_UNPACK)/cli
 VPATH += $(TOYWASM_UNPACK)/lib
@@ -88,14 +87,14 @@ VPATH += $(TOYWASM_UNPACK)/libwasi
 VPATH += src
 
 $(TOYWASM_TARBALL):
-	$(Q) echo "Downloading $(TOYWASM_TARBALL)"
-	$(Q) curl -O -L $(TOYWASM_URL)
+	$(call DOWNLOAD,$(TOYWASM_URL_BASE),$(TOYWASM_TARBALL))
 
 $(TOYWASM_UNPACK): $(TOYWASM_TARBALL)
-	$(Q) echo "Unpacking $(TOYWASM_TARBALL) to $(TOYWASM_UNPACK)"
+	$(ECHO_BEGIN)"Unpacking $(TOYWASM_TARBALL) to $(TOYWASM_UNPACK) "
 	$(Q) unzip $(TOYWASM_TARBALL)
 	$(Q) mv toywasm-$(TOYWASM_VERSION) $(TOYWASM_UNPACK)
 	$(Q) touch $(TOYWASM_UNPACK)
+	$(ECHO_END)
 
 # Download and unpack tarball if no git repo found
 ifeq ($(wildcard $(TOYWASM_UNPACK)/.git),)
