@@ -29,7 +29,7 @@ if(CONFIG_GRAPHICS_LVGL)
     FetchContent_Declare(
       lvgl_fetch
       DOWNLOAD_DIR ${CMAKE_CURRENT_LIST_DIR}
-      URL "https://github.com/lvgl/lvgl/archive/refs/tags/v9.2.1.zip"
+      URL "https://github.com/lvgl/lvgl/archive/refs/heads/release/v9.2.zip"
           SOURCE_DIR
           ${CMAKE_CURRENT_LIST_DIR}/lvgl
           BINARY_DIR
